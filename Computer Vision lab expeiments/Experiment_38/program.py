@@ -1,0 +1,10 @@
+import cv2
+img=cv2.imread("input/face_sample.jpg")
+gray=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+cascade=cv2.CascadeClassifier(cv2.data.haarcascades+"haarcascade_frontalface_default.xml")
+faces=cascade.detectMultiScale(gray,1.1,5,minSize=(30,30))
+out=img.copy()
+for (x,y,w,h) in faces: cv2.rectangle(out,(x,y),(x+w,y+h),(0,255,0),3)
+cv2.putText(out,f"Total faces: {len(faces)}",(15,35),cv2.FONT_HERSHEY_SIMPLEX,.8,(0,0,255),2)
+cv2.imwrite("output/face_count.jpg",out)
+print("Total number of faces:",len(faces))

@@ -1,0 +1,11 @@
+import cv2, numpy as np
+width=int(input("Enter image width: ")); height=int(input("Enter image height: "))
+img=np.full((height,width,3),255,np.uint8)
+bw=max(1,width//10); bh=max(1,height//10)
+s=min(bw,bh)
+cv2.rectangle(img,(0,0),(s-1,s-1),(0,0,0),-1)
+cv2.rectangle(img,(width-s,0),(width-1,s-1),(255,0,0),-1)
+cv2.rectangle(img,(0,height-s),(s-1,height-1),(0,255,0),-1)
+cv2.rectangle(img,(width-s,height-s),(width-1,height-1),(0,0,255),-1)
+cv2.imwrite("output/four_corner_boxes.jpg",img)
+print("Created white image with four coloured corner boxes")
